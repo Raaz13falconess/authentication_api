@@ -5,7 +5,7 @@ const profileController = require("../controllers/profile");
 const registerController = require("../controllers/register");
 const tokenController = require("../controllers/validToken");
 const auth = require("../auth/auth");
-
+const changePasswordController = require("../controllers/changePassword");
 
 const user_route = express();
 
@@ -18,5 +18,7 @@ user_route.post("/register", registerController.registerUser);
 user_route.post("/tokenValid", auth.authorizedRoutes, tokenController.validToken);
 
 user_route.get("/profile", auth.authorizedRoutes, profileController.userProfile);
+
+user_route.post("/change-password", auth.authorizedRoutes, changePasswordController.changePassword);
 
 module.exports = {user_route};

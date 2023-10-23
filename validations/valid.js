@@ -60,5 +60,26 @@ const validateLogin = async(loginInfo) => {
     return true;
 }
 
-module.exports = {validateRegistration, validateLogin, errorMessage};
+const validateChangePasswordForm = (formInfo) => {
+    const { password, confirmPassword} = formInfo;
+    if(!password || !confirmPassword) {
+        message = "All fields are required";
+        return false;
+    }
+
+    const isPasswordValid = strongPassword(password);
+    if(isPasswordValid) {
+        if(password != confirmPassword) {
+            message = "Passwords don't match";
+            return false;
+        }
+    }
+    else {
+        message = "Choose a strong password";
+        return false;
+    }
+    return true;
+}
+
+module.exports = {validateRegistration, validateLogin, errorMessage, validateChangePasswordForm};
 
